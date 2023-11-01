@@ -1,17 +1,50 @@
 <div class="container-fluid text-white p-5">
-
   <div *ngIf="type == 'success'">
-    <div class="alert alert-success alert-dismissible fade show" *ngIf="messageStatus" role="alert">
-      {{message}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-        (click)="status('',false,'success')"></button>
+    <div
+      class="alert alert-success alert-dismissible fade show"
+      *ngIf="messageStatus"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+        (click)="status('', false, 'success')"
+      ></button>
+    </div>
+  </div>
+  <div *ngIf="type == 'warning'">
+    <div
+      class="alert alert-warning alert-dismissible fade show"
+      *ngIf="messageStatus"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+        (click)="status('', false, 'warning')"
+      ></button>
     </div>
   </div>
   <div *ngIf="type == 'danger'">
-    <div class="alert alert-danger alert-dismissible fade show" *ngIf="messageStatus" role="alert">
-      {{message}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-        (click)="status('',false,'danger')"></button>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="messageStatus"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+        (click)="status('', false, 'danger')"
+      ></button>
     </div>
   </div>
 
@@ -19,27 +52,51 @@
   <div class="row row-cols-5 mt-3">
     <div class="col">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="nome" placeholder="Nome" />
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="nome"
+          placeholder="Nome"
+        />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="sobrenome" placeholder="Sobrenome" />
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="sobrenome"
+          placeholder="Sobrenome"
+        />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="idade" placeholder="Idade" />
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="idade"
+          placeholder="Idade"
+        />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="peso" placeholder="Peso" />
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="peso"
+          placeholder="Peso"
+        />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <button type="submit" class="btn btn-primary form-control" (click)="addUser()">
+        <button
+          type="submit"
+          class="btn btn-primary form-control"
+          (click)="addUser()"
+        >
           Adicionar
         </button>
       </div>
@@ -50,7 +107,7 @@
     <table class="table table-dark text-center">
       <thead>
         <tr>
-          <th scope="col"> # </th>
+          <th scope="col">#</th>
           <th scope="col">Nome</th>
           <th scope="col">Sobrenome</th>
           <th scope="col">Idade</th>
@@ -60,14 +117,113 @@
       </thead>
       <tbody>
         <tr *ngFor="let usuario of listaUsuarios; let i = index">
-          <th scope="row">{{i + 1}}</th>
-          <td>{{usuario.nome}}</td>
-          <td>{{usuario.sobrenome}}</td>
-          <td>{{usuario.idade}}</td>
-          <td>{{usuario.peso}}</td>
-          <td><button class="btn btn-sm btn-danger" (click)="removeUser(i)">Excluir</button></td>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.sobrenome }}</td>
+          <td>{{ usuario.idade }} anos</td>
+          <td>{{ usuario.peso }} kg</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-sm btn-warning me-1"
+              data-bs-toggle="modal"
+              data-bs-target="#editarModal"
+              (click)="edicao(i)"
+            >
+              Editar
+            </button>
+            <button class="btn btn-sm btn-danger ms-1" (click)="removeUser(i)">
+              Excluir
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="editarModal"
+  tabindex="-1"
+  aria-labelledby="editarModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarModalLabel">Editar usuário</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <div class="mb-2">Nome</div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="nome"
+              placeholder="Nome"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-2">Sobrenome</div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="sobrenome"
+              placeholder="Sobrenome"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-2">Idade</div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="idade"
+              placeholder="Idade"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-2">Peso</div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="peso"
+              placeholder="Peso"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="clearDados()"
+        >
+          Fechar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="editarUser()"
+        >
+          Salvar alterações
+        </button>
+      </div>
+    </div>
   </div>
 </div>
