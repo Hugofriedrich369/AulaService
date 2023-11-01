@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <h1>Cadastro de Usuário</h1>
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Nome</span>
+        <input type="text" class="form-control" [(ngModel)]="nome" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Sobrenome</span>
+        <input type="text" class="form-control" [(ngModel)]="sobrenome" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Idade</span>
+        <input type="number" class="form-control" [(ngModel)]="idade" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Peso</span>
+        <input type="number" class="form-control" [(ngModel)]="peso" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <button
+          type="submit"
+          class="btn btn-primary form-control"
+          (click)="addUser()"
+        >
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h3>Usuarios Cadastrados</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let usuario of listaUsuarios">
+        {{ usuario.nome }}
+        {{usuario.sobrenome}}
+        {{usuario.idade}} anos
+        {{usuario.peso}} kg
+      </li>
+    </ul>
+  </div>
+</div>
