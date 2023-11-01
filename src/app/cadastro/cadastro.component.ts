@@ -10,8 +10,8 @@ import { Usuario } from './IUsuario';
 export class CadastroComponent {
   nome!: string;
   sobrenome!: string;
-  idade!: number;
-  peso!: number;
+  idade!: string;
+  peso!: string;
   listaUsuarios!: Usuario[];
   constructor(private cadastroService: CadastroService) {
     this.listaUsuarios = this.cadastroService.usuarios;
@@ -21,16 +21,21 @@ export class CadastroComponent {
     this.cadastroService.addUser({
       nome: this.nome,
       sobrenome: this.sobrenome,
-      idade: this.idade,
-      peso: this.peso,
+      idade: this.idade + " anos",
+      peso: this.peso + " kg",
     });
     this.nome = '';
     this.sobrenome = '';
-    this.idade = 0;
-    this.peso = 0;
+    this.idade = "";
+    this.peso = "";
 
     this.listaUsuarios = this.cadastroService.usuarios;
     console.log(this.listaUsuarios);
     console.log("Usuario adicionado!")
+  }
+
+  removeUser(index: number) {
+    console.log(index)
+    this.cadastroService.removeUser(index);
   }
 }

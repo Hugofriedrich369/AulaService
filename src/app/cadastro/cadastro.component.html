@@ -1,51 +1,57 @@
-<div class="container-fluid">
+<div class="container-fluid text-white p-5">
   <h1>Cadastro de Usuário</h1>
-  <div class="row">
+  <div class="row row-cols-5 mt-3">
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text">Nome</span>
-        <input type="text" class="form-control" [(ngModel)]="nome" />
+        <input type="text" class="form-control" [(ngModel)]="nome" placeholder="Nome" />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text">Sobrenome</span>
-        <input type="text" class="form-control" [(ngModel)]="sobrenome" />
+        <input type="text" class="form-control" [(ngModel)]="sobrenome" placeholder="Sobrenome" />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text">Idade</span>
-        <input type="number" class="form-control" [(ngModel)]="idade" />
+        <input type="text" class="form-control" [(ngModel)]="idade" placeholder="Idade" />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text">Peso</span>
-        <input type="number" class="form-control" [(ngModel)]="peso" />
+        <input type="text" class="form-control" [(ngModel)]="peso" placeholder="Peso" />
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <button
-          type="submit"
-          class="btn btn-primary form-control"
-          (click)="addUser()"
-        >
+        <button type="submit" class="btn btn-primary form-control" (click)="addUser()">
           Adicionar
         </button>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container mt-5">
     <h3>Usuarios Cadastrados</h3>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let usuario of listaUsuarios">
-        {{ usuario.nome }}
-        {{usuario.sobrenome}}
-        {{usuario.idade}} anos
-        {{usuario.peso}} kg
-      </li>
-    </ul>
+    <table class="table table-dark text-center">
+      <thead>
+        <tr>
+          <th scope="col"> # </th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Idade</th>
+          <th scope="col">Peso</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listaUsuarios; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{usuario.nome}}</td>
+          <td>{{usuario.sobrenome}}</td>
+          <td>{{usuario.idade}}</td>
+          <td>{{usuario.peso}}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="removeUser(i)">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
