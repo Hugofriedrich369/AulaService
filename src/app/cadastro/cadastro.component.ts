@@ -13,29 +13,38 @@ export class CadastroComponent {
   idade!: string;
   peso!: string;
   listaUsuarios!: Usuario[];
+  type!: string;
+
+  message!: string;
+  messageStatus!: boolean;
+
   constructor(private cadastroService: CadastroService) {
     this.listaUsuarios = this.cadastroService.usuarios;
   }
 
   addUser() {
-    this.cadastroService.addUser({
-      nome: this.nome,
-      sobrenome: this.sobrenome,
-      idade: this.idade + " anos",
-      peso: this.peso + " kg",
-    });
-    this.nome = '';
-    this.sobrenome = '';
-    this.idade = "";
-    this.peso = "";
-
+    this.cadastroService.addUser(this.nome, this.sobrenome, this.idade, this.peso);
+    this.clearDados()
     this.listaUsuarios = this.cadastroService.usuarios;
-    console.log(this.listaUsuarios);
-    console.log("Usuario adicionado!")
+    this.status(`Usuário ${this.nome} adicionado com sucesso!`, true, "success")
   }
 
   removeUser(index: number) {
     console.log(index)
     this.cadastroService.removeUser(index);
+    this.status(`Usuário removido com sucesso!`, true, "danger")
+  }
+
+  clearDados() {
+    this.nome = '';
+    this.sobrenome = '';
+    this.idade = "";
+    this.peso = "";
+  }
+
+  status(message: string, status: boolean, type: string) {
+    this.message = message;
+    this.messageStatus = status;
+    this.type = type;
   }
 }

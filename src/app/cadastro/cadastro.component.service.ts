@@ -10,8 +10,16 @@ export class CadastroService {
     }
   ];
 
-  addUser(usuario: Usuario) {
-    this.usuarios.push(usuario);
+  addUser(nome: string, sobrenome: string, idade: string, peso: string) {
+
+    const usuarioNovo: Usuario = {
+      nome: nome,
+      sobrenome: sobrenome,
+      idade: idade + " anos",
+      peso: peso + " kg",
+    }
+
+    this.usuarios.push(usuarioNovo);
   }
 
   removeUser(index: number) {
